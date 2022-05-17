@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lists</title>
+<style>
+.menu-home
+{
+	cursor:pointer;
+}
+.menu-person
+{
+	cursor:pointer;
+}
+.person-list
+{
+	border:none;
+	background-color:transparent;
+	color:blue;
+	cursor:pointer;
+}
+.person-list:hover
+{
+	color:cyan;
+}
+</style>
+<script>
+/*
+*
+*
+* The Data Area
+*
+*
+*/
+class Person 
+{
+	constructor(id, sname, fname, dob, profession, hobbies) 
+	{
+		this.id		= id;
+    	this.sname	= sname;
+    	this.fname	= fname;
+    	this.dob	= dob;
+		this.profession = profession;
+		this.hobbies	= hobbies;
+
+		if (fname == '')
+		{
+			this.name = sname.substring(0,1).toUpperCase() + sname.substring(1, sname.length).toLowerCase();
+			this.lname = sname.substring(0,1).toUpperCase() + sname.substring(1, sname.length).toLowerCase();
+		}
+		else
+		{
+			this.name = fname.substring(0,1).toUpperCase() + fname.substring(1, fname.length).toLowerCase() + ' ' + sname.substring(0,1).toUpperCase() + sname.substring(1, sname.length).toLowerCase();
+			this.lname = sname.substring(0,1).toUpperCase() + sname.substring(1, sname.length).toLowerCase() + ', ' + fname.substring(0,1).toUpperCase() + fname.substring(1, fname.length).toLowerCase();
+		}
+
+		person.data[id] = {id:id, sname:sname, fname:fname, name:this.name, lname:this.lname, dob:dob, profession:profession, hobbies:hobbies};
+
+  	}
+}
+var person = {list:new Array(), data:new Array()};
+person.list.push(new Person('way-joh', 'wayne', 'john', '1907-05-26', 'ac', new Array('fo', 'ba')));
+person.list.push(new Person('hep-kat', 'hepburn', 'katherine', '1907-05-12', 'ac', new Array('se', 'sw')));
+person.list.push(new Person('jon-tom', 'jones', 'tom', '1940-06-07', 'si', new Array('fo', 'sw')));
+person.list.push(new Person('bla-cil', 'black', 'cilla', '1943-05-27', 'si', new Array('fo', 'se')));
+
+class Profession 
+{
+	constructor(id, name) 
+	{
+    		this.id = id;
+    		this.name = name;
+
+		profession.data[id] = name;
+  	}
+
+
+}
+var profession = {list:new Array(), data:new Array()};
+profession.list.push(new Profession('ac', 'Actor'));
+profession.list.push(new Profession('si', 'Singer'));
+profession.list.push(new Profession('wr', 'Writer'));
+profession.list.push(new Profession('di', 'Director'));
+profession.list.push(new Profession('pr', 'Producer'));
+
+class Hobby 
+{
+	constructor(id, name) 
+	{
+    		this.id = id;
+    		this.name = name;
+
+		hobby.data[id] = name
+  	}
+
+
+}
+var hobby = {list:new Array(), data:new Array()};
+hobby.list.push(new Hobby('fo', 'Football'));
+hobby.list.push(new Hobby('ba', 'Baseball'));
+hobby.list.push(new Hobby('ho', 'Hockey'));
+hobby.list.push(new Hobby('ne', 'Netball'));
+hobby.list.push(new Hobby('sw', 'Swimming'));
+hobby.list.push(new Hobby('se', 'Sewing'));
+hobby.list.push(new Hobby('bi', 'Bingo'));
+hobby.list.push(new Hobby('kn', 'Knitting'));
+hobby.list.push(new Hobby('re', 'Reading'));
+hobby.list.push(new Hobby('mo', 'Movies'));
+
+
+
+var selected = {page:'home', action:''};
+
+</script>
+</head>
+<body onload="Page()">
+<div id="page"></div>
+<div id="home" style="display:none">
+	<div align="center">
+	
+		<div id="menu-home">
+			<input type="button" class="menu-home" value="person" onclick="selected.page='person';Page()">
+			<input type="button" class="menu-home" value="hobby" onclick="selected.page='hobby';Page()">
+			<input type="button" class="menu-home" value="profession" onclick="selected.page='profession';Page()">
+		</div>
+		<div>
+			Welcome to the home page, we hope you enjoy your time here, the menu<br>
+			above gives your choices they are: <br><br>
+
+			person - list, add, update or delete informion of a person
+		</div>
+</div>
+<div id="person" style="display:none">
+	<div align="center">
+	
+		<div id="menu-home">
+			<input type="button" class="menu-person" value="home" onclick="selected.page='home';selected.action='';Page()">
+			<input type="button" class="menu-person" value="list" onclick="selected.page='person';selected.action='list';Page()">
+			<input type="button" class="menu-person" value="add" onclick="selected.page='person';selected.action='add';Page()">
+			<input type="button" class="menu-person" value="change" onclick="selected.page='person';selected.action='change';Page()">
+			<input type="button" class="menu-person" value="delete" onclick="selected.page='person';selected.action='delete';Page()">
+		</div>
+
+		<div>
+			[Code]
+		</div>
+</div>
+<div id="person-home" style="display:none">
+	<div align="center">
+		Welcome to the person home page, this is what you can do here<br><br>
+
+		list - list all the people on the database<br>
+		add - add a person on the database<br>
+		change - change the information of a person on the database<br>
+		delete - delete the entry of a person on the database<br> 
+</div>
+<div id="person-add" style="display:none">
+	<div align="center">
+		<table cellpadding="0" cellspacing="0" border="0">
+		<tr>
+			<td style="font-family:papyrus" colspan="0">person add is under construction</td>
+		</tr>
+		<tr>
+			<td>first name</td>
+			<td><input type="data" name="fname"></td>
+		</tr>
+		<tr>
+			<td>surname</td>
+			<td><input type="data" name="sname"></td>
+		</tr>
+		<tr>
+			<td>date of birth</td>
+			<td>
+				<select>
+					<script>
+						for (i = 1; i < 32; i++)
+						{
+							document.write('<option value="' + i + '">' + i + '</option>');
+						}
+					</script>
+				</select>
+				<select>
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+				<select>
+					<script>
+						for (i = 1850; i < 2024; i++)
+						{
+							document.write('<option value="' + i + '">' + i + '</option>');
+						}
+					</script>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Profession</td>
+			<td>
+				<select>
+					<script>
+						for (i in profession.list)
+						{
+							document.write('<option value="' + profession.list[i].id + '">' + profession.list[i].name + '</option>');
+						}
+					</script>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>hobbies</td>
+			<td>
+				<select multiline>
+					<script>
+						for (i in hobby.list)
+						{
+							document.write('<option value="' + hobby.list[i].id + '">' + hobby.list[i].name + '</value>');
+						}
+					</script>
+				</select>
+			</td>
+		</tr>
+		</table>  
+</div>
+<div id="error" style="display:none">
+</div>
+<div id="title" style="display:none">
+	<div align="center">Super Dooper Web Site</div>
+</div>
+
+</body>
+<script>
+/*
+*
+*
+*
+*	The function Area
+*
+*
+*
+*/
+function Page()
+{
+/*
+	Displays the page that the user has selected. On first run the 'Home' page is displayed 
+*/
+	var page = '';
+	var name = selected.page;
+
+	switch (name)
+	{
+		case 'home'			: page = Home();break;
+		case 'person'		: page = PersonHome();break;
+		case 'hobby'		: page = HobbyHome();break;
+		case 'profession'	: page = ProfessionHome();break;
+		default 			: page = Error();
+	}
+
+	document.getElementById('page').innerHTML = page;
+}
+
+function Home()
+{
+/*
+	Displays the Home page
+*/
+
+	var page = document.getElementById('home').innerHTML;
+
+	return Title() + SubTitle('home') + page;
+}
+
+function PersonHome()
+{
+/*
+	Displays the Person page and data appropiate to the 'action' selected by the user
+*/
+
+	var code = '';
+
+	switch (selected.action)
+	{
+		case 'list'		: code = PersonList();break;
+		case 'add'		: code = PersonAdd();break;
+		case 'change'	: code = PersonChange();break;
+		case 'delete'	: code = PersonDelete();break;
+		case 'display'	: code = PersonDisplay();break;
+		default			: code = document.getElementById('person-home').innerHTML;
+	}
+
+	var page = document.getElementById('person').innerHTML;
+	page = page.replace('[Code]', code);
+
+	return Title() + SubTitle('person') + page;
+}
+
+function PersonList()
+{
+/*
+	List all the people in the database
+*/
+
+	SortByProperty(person.list, 'id', 'desc')
+
+	var code = '<table cellpadding="0" cellspacing="0" border="0">';
+
+	for (i in person.list)
+	{
+		code += '<tr><td><input type="button" class="person-list" value="' + person.list[i].lname + '" onclick="selected.action=' + "'display'" + ';selected.person=' + "'" + person.list[i].id + "'" + ';Page()"></td></tr>';
+	}
+
+	code += '</table>';
+
+	return code;
+}
+
+function PersonAdd()
+{
+/*
+	Adds a person to the database
+*/
+	var code = document.getElementById('person-add').innerHTML;
+
+	return code;
+}
+
+function PersonChange()
+{
+/*
+	Change the details of a person identiefied by it id. The user does not know the id
+	they will only select by the name that is displayed on the screen
+*/
+	var code = '<div style="font-family:papyrus">Person Change is under construction</div>';
+
+	return code;
+}
+
+function PersonDelete()
+{
+/*
+	Delete a person from the database by that persons id. The user wont know the id
+	they will selected a person by their name
+*/
+	var code = '<div style="font-family:papyrus">Person Delete is under construction</div>';
+
+	return code;
+}
+
+function PersonDisplay()
+{
+/*
+	Display the details of a person according by their id. The user will not know a person's id
+	they will only select by a name on the screen
+*/
+
+	if (PersonNameExists())
+	{
+		var code = '<div style="padding-top:10px;font-family:trebuchet ms;font-size:20px;color:darkblue;background-color:blue">' + selected.name;
+		
+		selected.profession = person.data[selected.person].profession;
+
+		if (ProfessionNameExists())
+		{
+			code += '<div>Profession: ' +  selected.name + '</div>';
+		}
+		else
+		{
+			code += selected.message;
+		}
+
+		if (person.data[selected.person].hobbies.length == 0)
+		{
+			code += '<div>Hobbies: no hobbies selected</div>';
+		}
+		else
+		{
+			var hobbies = new Array();
+		
+			for (i in person.data[selected.person].hobbies)
+			{
+				selected.hobby = person.data[selected.person].hobbies[i];
+
+				if (HobbyNameExists())
+				{
+					name = hobby.data[selected.hobby];
+				}
+				else
+				{
+					name = "Hobby code '" + selected.hobby + "' not found";
+				}
+
+				hobbies.push(name);
+			}
+
+			code += 'Hobbies: ' + hobbies.join(',');
+		}
+
+		code += '</div>';
+	}
+	else
+	{
+		var code = selected.name;
+	}
+
+	return code;
+}
+
+function PersonNameExists()
+{
+	var status = false;
+
+	if (person.data[selected.person])
+	{
+		selected.name = person.data[selected.person].name;
+		status = true;
+	}
+	else
+	{
+		selected.name = selected.person + ' not found';
+	}
+
+	return status;
+}
+
+function HobbyHome()
+{
+/*
+	Displays the Hobby page and data appropiate to the 'action' selected by the user
+*/
+
+	var page = '<div style="color:green;font-family:papryus" align="center">The Hobby page is under construction</div>';
+	page += '<div align="center"><input type="button" value="back" onclick="selected.page='+ "'home'" +';Page()"></div>';
+
+	return Title() + SubTitle('hobby') + page;
+}
+
+function HobbyNameExists()
+{
+	var status = false;
+
+	if (hobby.data[selected.hobby])
+	{
+		selected.name = hobby.data[selected.hobby];
+		status = true;
+	}
+	else
+	{
+		selected.message = "Hobby code '" + selected.hobby + "' not found";
+		selected.name = selected.hobby + ' not found';
+	}
+
+	return status;
+}
+
+function ProfessionHome()
+{
+/*
+	Displays the Person page and data appropiate to the 'action' selected by the user
+*/
+
+	var page = '<div style="color:purple;font-family:papryus" align="center">The Profession page is under construction</div>';
+	page += '<div align="center"><input type="button" value="back" onclick="selected.page='+ "'home'" +';Page()"></div>';
+
+	return Title() + SubTitle('profession') + page;
+}
+
+function ProfessionNameExists()
+{
+	var status = false;
+
+	if (profession.data[selected.profession])
+	{
+		selected.name = profession.data[selected.profession];
+		status = true;
+	}
+	else
+	{
+		alert('not hey');
+		selected.message = "Profession code '" + selected.profession + "' not found";
+		selected.name = selected.profession + ' not found';
+	}
+
+	return status;
+}
+
+function Error()
+{
+
+	var page = '<div align="center">Cannot find the page: ' + selected.page + '</div>';
+
+	return Title() + SubTitle('error') + page;
+}
+
+function Title()
+{
+	var page = document.getElementById('title').innerHTML;
+
+	return page;
+}
+
+function SubTitle(name)
+{
+	var page = '<div align="center">' + name + '</div>';
+
+	return page;
+}
+
+function SortByProperty(array, property, order)
+{
+
+	if (order == 'dec' || order == 'desc' || order == 'd')
+	{
+		return array.sort( function ( a, b ) { return b[property] - a[property]; } );
+	}
+	else
+	{
+		return array.sort( function ( a, b ) { return a[property] - b[property]; } );
+	}
+}
+</script>
+
+</html>
