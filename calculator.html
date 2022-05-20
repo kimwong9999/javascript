@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>calculator</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="calculator.css">
+<script type="text/javascript" src="calculator.js"></script>
+
+<script>
+
+</script>
+</head>
+<body>
+<div class="title text-uppercase font-weight-bold display-4 text-success" align="center">calculator</div>
+<div align="center">
+	<div class="main">
+		<div>
+			<input type="button" class="buttons" value="+" onclick="calculate('+')">
+			<input type="button" class="buttons" value="-" onclick="calculate('-')">
+			<input type="button" class="buttons" value="*" onclick="calculate('*')">
+			<input type="button" class="buttons" value="/" onclick="calculate('/')">
+			<input type="button" class="buttons" value="clear" onclick="clearInputs()">
+		</div>
+		<div class="input-line">
+			<input type="button" class="label" value="Input 1:">
+			<input type="text" class="input" id="input1">
+			<input type="button" class="label" value="Input 2:">
+			<input type="text" class="input" id="input2">
+		</div>
+		<div>
+			<input type="button" class="label" value="Result:">
+			<input type="button" class="result" id="result" readonly>
+		</div>
+		<div>
+			<input type="button" class="message" id="message">
+		</div>
+	</div>
+</div>
+</body>
+</html>
